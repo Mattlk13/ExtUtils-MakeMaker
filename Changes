@@ -1,3 +1,291 @@
+7.63_04 Wed 30 Jun 15:15:01 BST 2021
+
+    Doc fixes:
+    - Describe CCFLAGS’ default
+
+7.63_03 Tue 22 Jun 14:39:32 BST 2021
+
+    OS390 Enhancements:
+    - Fix override xs_make_dynamic_lib() for os390
+
+7.63_02 Thu  3 Jun 19:52:03 BST 2021
+
+    Doc fixes:
+    - Changed wording for POLLUTE
+
+7.63_01 Tue 25 May 16:22:50 BST 2021
+
+    Bug fixes:
+    - Comparing inodes numerically is unsafe
+
+7.62    Tue 13 Apr 18:58:24 BST 2021
+
+    No changes since v7.61_01
+
+7.61_01 Sun 21 Mar 09:24:57 GMT 2021
+
+    Bug fixes:
+    - Use shellwords in ExtUtils::Liblist::Kid::_unix_os2_ext
+
+7.60    Wed 17 Feb 10:45:47 GMT 2021
+
+    No changes since v7.59_01
+
+7.59_01 Tue  2 Feb 09:47:29 GMT 2021
+
+    Bug fixes:
+    - Don't allow hyphens in parsed versions
+
+    Test fixes:
+    - Use correct hint file name in hints.t
+
+7.58    Mon 21 Dec 18:16:04 GMT 2020
+
+    No changes since v7.57_02
+
+7.57_02 Fri 18 Dec 23:04:09 GMT 2020
+
+    Macosx fixes:
+    - Improve dlopen check on MacOS
+
+7.57_01 Fri 18 Dec 13:30:30 GMT 2020
+
+    Macosx fixes:
+    - Use dlopen to check for library presence on Mac OS (Big Sur fix)
+
+    Bug fixes:
+    - check CPAN::Meta::Requirements capabilities rather than prereqs
+
+7.56    Thu 19 Nov 19:57:05 GMT 2020
+
+    No changes since v7.55_01
+
+7.55_01 Wed 18 Nov 18:23:19 GMT 2020
+
+    Bug fixes:
+    - RT#133762 Explicitly print to STDOUT in EUMM.pm
+
+7.54    Thu 12 Nov 19:23:18 GMT 2020
+
+    No changes since v7.53_01
+
+7.53_01 Tue 10 Nov 03:34:42 GMT 2020
+
+    Regression fixes:
+    - Fixed Darwin cflags override
+
+    Meta fixes:
+    - Updated URLs to use https
+
+7.52    Wed  4 Nov 19:49:43 GMT 2020
+
+    No changes since v7.51_01
+
+7.51_01 Wed  4 Nov 00:01:41 GMT 2020
+
+    Test fixes:
+    - prevent MM_Win32::init_tools() warning in core
+
+7.50    Wed 21 Oct 17:33:53 BST 2020
+
+    No changes since v7.49_04
+
+7.49_04 Tue 13 Oct 18:42:05 BST 2020
+
+    Win32 fixes:
+    - make can_dep_space check for short path support
+
+    Macosx fixes:
+    - Handle XCode 12's implicit adding of Werror=implicit-function-declaration
+
+7.49_03 Fri  9 Oct 21:30:57 BST 2020
+
+    Regression fixes:
+    - disable strict when evaling hints files
+
+    Bug fixes:
+    - clean up and improve MIN_PERL_VERSION handling
+
+7.49_02 Thu  8 Oct 08:35:05 BST 2020
+
+    Bug fixes:
+    - Change wording of MIN_PERL_VERSION format message to clarify
+      fatally
+
+    Doc fixes:
+    - Fixed some typos
+
+7.49_01 Tue  6 Oct 18:01:38 BST 2020
+
+    Regression fixes:
+    - fix PERL_CORE warnings from ExtUtils::CBuilder
+
+7.48    Sun  4 Oct 11:39:22 BST 2020
+
+    No changes since v7.47_12
+
+7.47_12 Wed 30 Sep 16:19:25 BST 2020
+
+    Bug fixes:
+    - Make Mkbootstrap.pm strict
+
+    Test fixes:
+    - Skip the failing dynamic vs static tests on Win32
+
+7.47_11 Sun 20 Sep 10:02:15 BST 2020
+
+    Enhancements:
+    - Hint file loading returned to using eval() as documented
+
+7.47_10 Tue 15 Sep 19:30:32 BST 2020
+
+    Test fixes:
+    - BareV2String should also be skipped on v5.8.0
+
+7.47_09 Mon 14 Sep 14:33:52 BST 2020
+
+    Bug fixes:
+    - Removed duplicated NOOP on pure_all
+
+    Test fixes:
+    - Remove tests for invalid version declarations
+    - Make windows specific code for NoXS compile under strict
+
+7.47_08 Mon 31 Aug 09:43:01 BST 2020
+
+    Test fixes:
+    - Resolved race conditions so the whole testsuite
+      can be run in parallel safely again
+
+    QA Fixes:
+    - Added github action for Strawberry Perl
+    - Added github action for Ubuntu/Linux
+
+7.47_07 Mon  3 Aug 22:34:08 BST 2020
+
+    Bug fixes:
+    - Ensure all modules have 'use warnings'
+    - Resolve revealed problems with warnings
+
+    Test fixes:
+    - Ensure all tests have strict and warnings
+    - Resolve revealed problems with strict and warnings
+
+7.47_06 Sat  1 Aug 14:36:00 BST 2020
+
+    Bug fixes:
+    - Refine archname to use abi_version and abi_revision
+
+7.47_05 Fri 31 Jul 10:35:54 BST 2020
+
+    Bug fixes:
+    - use $^V instead of PERL_VERSION after Perl 5.10
+
+7.47_04 Tue 28 Jul 19:34:00 BST 2020
+
+    Test fixes:
+    - Skip static tests on AIX and z/OS when in
+      core
+
+    QA fixes:
+    - Added v5.30 and v5.32 to travis build
+
+7.47_03 Wed  8 Jul 21:58:29 BST 2020
+
+    Test fixes:
+    - Correct skip count in MM_Cygwin.t
+
+7.47_02 Tue  7 Jul 01:40:13 BST 2020
+
+    OS390 Enhancements:
+    - Added MM subclass for OS390
+    - Override xs_make_dynamic_lib() for os390
+
+7.47_01 Fri 26 Jun 10:55:42 BST 2020
+
+    Bug fixes:
+    - Sanitise provided VERSION and VERSION_FROM
+      ( RT#132875 )
+
+7.46  Tue 23 Jun 10:19:40 BST 2020
+
+    No changes since v7.45_01
+
+7.45_01 Thu 28 May 17:29:45 BST 2020
+
+    Bug fixes:
+    - Always link to $Config{libs} on cygwin
+
+    Test fixes:
+    - Fix testing how some versions should be parsed
+
+    QA fixes:
+    - Add libnsl-devel to Cygwin packages we need
+
+7.44    Tue 14 Jan 16:35:06 GMT 2020
+
+    No changes since v7.43_01
+
+7.43_01 Sun  5 Jan 12:41:43 GMT 2020
+
+    Bug fixes:
+    - Match final dir component in init_MANPODS
+
+    Test Fixes:
+    - Use internal reference to Makefile in build_man.t
+
+7.42    Tue 17 Dec 22:02:25 GMT 2019
+
+    No changes since v7.41_01
+
+7.41_01 Mon 16 Dec 21:36:24 GMT 2019
+
+    Test fixes:
+    - README.pod warnings are suppressed during testing
+      so no need to skip when PERL_CORE is defined
+
+    Doc fixes:
+    - Update referenced modules for new distributions
+    - Updated SEE ALSO section accordingly
+
+7.40    Mon 16 Dec 19:33:13 GMT 2019
+
+    No changes since v7.39_05
+
+7.39_05 Thu 21 Nov 11:45:13 GMT 2019
+
+    Bug fixes:
+    - Always assume that libraries are shared on AIX
+
+7.39_04 Mon 18 Nov 14:54:46 GMT 2019
+
+    Test Fixes:
+    - Skip "merged /usr" tests on Cygwin
+
+    QA Fixes:
+    - Added cygwin testing with Github actions
+    - Added macos testing with Github actions
+
+7.39_03 Sun 17 Nov 19:53:04 GMT 2019
+
+    Doc fixes:
+    - Fix typo in link to MakeMaker
+    - Link to referenced modules from MM_Cygwin maybe_command
+
+7.39_02 Thu  7 Nov 09:33:29 GMT 2019
+
+    Cygwin fixes:
+    - Removed MM_Cygwin all_target() override
+
+    Doc fixes:
+    - Add crosslinks to various referenced documentation
+
+7.39_01 Mon 16 Sep 07:19:37 BST 2019
+
+    Test fixes:
+    - README.pod warnings suppressed during testing
+    - Don't parallise dynamic/static tests
+
 7.38 Wed 11 Sep 10:01:46 BST 2019
 
     No changes since v7.37_04

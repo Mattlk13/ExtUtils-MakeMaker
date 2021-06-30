@@ -3,6 +3,7 @@ package ExtUtils::MM_Unix;
 require 5.006;
 
 use strict;
+use warnings;
 
 use Carp;
 use ExtUtils::MakeMaker::Config;
@@ -14,7 +15,7 @@ use ExtUtils::MakeMaker qw($Verbose neatvalue _sprintf562);
 
 # If we make $VERSION an our variable parse_version() breaks
 use vars qw($VERSION);
-$VERSION = '7.38';
+$VERSION = '7.63_04';
 $VERSION =~ tr/_//d;
 
 require ExtUtils::MM_Any;
@@ -63,10 +64,10 @@ ExtUtils::MM_Unix - methods used by ExtUtils::MakeMaker
 =head1 DESCRIPTION
 
 The methods provided by this package are designed to be used in
-conjunction with ExtUtils::MakeMaker. When MakeMaker writes a
+conjunction with L<ExtUtils::MakeMaker>. When MakeMaker writes a
 Makefile, it creates one or more objects that inherit their methods
-from a package C<MM>. MM itself doesn't provide any methods, but it
-ISA ExtUtils::MM_Unix class. The inheritance tree of MM lets operating
+from a package L<MM|ExtUtils::MM>. MM itself doesn't provide any methods, but
+it ISA ExtUtils::MM_Unix class. The inheritance tree of MM lets operating
 specific packages take the responsibility for all the methods provided
 by MM_Unix. We are trying to reduce the number of the necessary
 overrides by defining rather primitive operations within
@@ -93,8 +94,8 @@ Not all of the methods below are overridable in a
 Makefile.PL. Overridable methods are marked as (o). All methods are
 overridable by a platform specific MM_*.pm file.
 
-Cross-platform methods are being moved into MM_Any.  If you can't find
-something that used to be in here, look in MM_Any.
+Cross-platform methods are being moved into L<MM_Any|ExtUtils::MM_Any>.
+If you can't find something that used to be in here, look in MM_Any.
 
 =cut
 
@@ -1314,7 +1315,7 @@ sub _fixin_replace_shebang {
             if ($self->maybe_command($origcmd) && grep { $_ eq $origdir } @absdirs) {
                 my ($odev, $oino) = stat $origcmd;
                 my ($idev, $iino) = stat $interpreter;
-                if ($odev == $idev && $oino == $iino) {
+                if ($odev == $idev && $oino eq $iino) {
                     warn "$origcmd is the same as $interpreter, leaving alone"
                         if $Verbose;
                     $interpreter = $origcmd;
@@ -1506,12 +1507,13 @@ sub init_MANPODS {
     foreach my $num (1,3) {
         my $installdirs = uc $self->{INSTALLDIRS};
         $installdirs = '' if $installdirs eq 'PERL';
-        my $mandir = $self->_expand_macros(
-            $self->{ "INSTALL${installdirs}MAN${num}DIR" } );
+        my @mandirs = File::Spec->splitdir( $self->_expand_macros(
+            $self->{ "INSTALL${installdirs}MAN${num}DIR" } ) );
+        my $mandir = pop @mandirs;
         my $section = $num;
 
         foreach ($num, "${num}p", "${num}pm", qw< l n o C L >, "L$num") {
-            if ( $mandir =~ /\b(?:man|cat)$_$/ ) {
+            if ( $mandir =~ /^(?:man|cat)$_$/ ) {
                 $section = $_;
                 last;
             }
@@ -2999,7 +3001,7 @@ sub parse_version {
         chop;
         next if /^\s*(if|unless|elsif)/;
         if ( m{^ \s* package \s+ \w[\w\:\']* \s+ (v?[0-9._]+) \s* (;|\{)  }x ) {
-            local $^W = 0;
+            no warnings;
             $result = $1;
         }
         elsif ( m{(?<!\\) ([\$*]) (([\w\:\']*) \bVERSION)\b .* (?<![<>=!])\=[^=]}x ) {
@@ -3017,6 +3019,10 @@ sub parse_version {
       my $normal = eval { version->new( $result ) };
       $result = $normal if defined $normal;
     }
+    if ( defined $result ) {
+      $result = "undef" unless $result =~ m!^v?[\d_\.]+$!
+                        or eval { version->parse( $result ) };
+    }
     $result = "undef" unless defined $result;
     return $result;
 }
@@ -3032,8 +3038,8 @@ sub get_version {
             version::->import;
         };
         no strict;
+        no warnings;
         local *{$name};
-        local $^W = 0;
         $line = $1 if $line =~ m{^(.+)}s;
         eval($line); ## no critic
         return ${$name};
@@ -3231,11 +3237,12 @@ PPD_PERLVERS
     }
 
     my $archname = $Config{archname};
+
+    # archname did not change from 5.6 to 5.8, but those versions may
+    # not be not binary compatible so now we append the part of the
+    # version that changes when binary compatibility may change
     if ("$]" >= 5.008) {
-        # archname did not change from 5.6 to 5.8, but those versions may
-        # not be not binary compatible so now we append the part of the
-        # version that changes when binary compatibility may change
-        $archname .= "-$Config{PERL_REVISION}.$Config{PERL_VERSION}";
+        $archname .= "-$Config{api_revision}.$Config{api_version}";
     }
     push @ppd_chunks, sprintf <<'PPD_OUT', $archname;
         <ARCHITECTURE NAME="%s" />
@@ -3528,7 +3535,7 @@ sub escape_newlines {
 
 =item max_exec_len
 
-Using POSIX::ARG_MAX.  Otherwise falling back to 4096.
+Using L<POSIX>::ARG_MAX.  Otherwise falling back to 4096.
 
 =cut
 
@@ -3970,8 +3977,6 @@ sub top_targets {
 
     push @m, sprintf <<'EOF';
 pure_all :: config pm_to_blib subdirs linkext
-	$(NOECHO) $(NOOP)
-
 	$(NOECHO) $(NOOP)
 
 subdirs :: $(MYEXTLIB)

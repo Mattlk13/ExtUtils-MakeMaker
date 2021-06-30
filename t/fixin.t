@@ -1,5 +1,8 @@
 #!/usr/bin/perl -w
 
+use strict;
+use warnings;
+
 # Try to test fixin.  I say "try" because what fixin will actually do
 # is highly variable from system to system.
 
@@ -127,7 +130,7 @@ END
 SKIP: {
     eval { chmod(0755, "usrbin/interp") }
         or skip "no chmod", 8;
-    skip "Not relevant on VMS or MSWin32", 8 if $^O eq 'VMS' || $^O eq 'MSWin32';
+    skip "Not relevant on VMS or MSWin32", 8 if $^O eq 'VMS' || $^O eq 'MSWin32' || $^O eq 'cygwin';
 
     my $dir = getcwd();
     local $ENV{PATH} = join $Config{path_sep}, map "$dir/$_", qw(usrbin bin);

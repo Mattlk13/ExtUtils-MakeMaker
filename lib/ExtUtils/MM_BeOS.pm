@@ -1,6 +1,7 @@
 package ExtUtils::MM_BeOS;
 
 use strict;
+use warnings;
 
 =head1 NAME
 
@@ -12,7 +13,7 @@ ExtUtils::MM_BeOS - methods to override UN*X behaviour in ExtUtils::MakeMaker
 
 =head1 DESCRIPTION
 
-See ExtUtils::MM_Unix for a documentation of the methods provided
+See L<ExtUtils::MM_Unix> for a documentation of the methods provided
 there. This package overrides the implementation of these methods, not
 the semantics.
 
@@ -26,7 +27,7 @@ require ExtUtils::MM_Any;
 require ExtUtils::MM_Unix;
 
 our @ISA = qw( ExtUtils::MM_Any ExtUtils::MM_Unix );
-our $VERSION = '7.38';
+our $VERSION = '7.63_04';
 $VERSION =~ tr/_//d;
 
 

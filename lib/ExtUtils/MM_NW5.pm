@@ -10,7 +10,7 @@ ExtUtils::MM_NW5 - methods to override UN*X behaviour in ExtUtils::MakeMaker
 
 =head1 DESCRIPTION
 
-See ExtUtils::MM_Unix for a documentation of the methods provided
+See L<ExtUtils::MM_Unix> for a documentation of the methods provided
 there. This package overrides the implementation of these methods, not
 the semantics.
 
@@ -19,10 +19,11 @@ the semantics.
 =cut
 
 use strict;
+use warnings;
 use ExtUtils::MakeMaker::Config;
 use File::Basename;
 
-our $VERSION = '7.38';
+our $VERSION = '7.63_04';
 $VERSION =~ tr/_//d;
 
 require ExtUtils::MM_Win32;

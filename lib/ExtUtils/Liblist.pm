@@ -1,8 +1,9 @@
 package ExtUtils::Liblist;
 
 use strict;
+use warnings;
 
-our $VERSION = '7.38';
+our $VERSION = '7.63_04';
 $VERSION =~ tr/_//d;
 
 use File::Spec;

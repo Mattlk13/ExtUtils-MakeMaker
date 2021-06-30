@@ -50,6 +50,7 @@ lib/ExtUtils/MM_DOS.pm
 lib/ExtUtils/MM_MacOS.pm
 lib/ExtUtils/MM_NW5.pm
 lib/ExtUtils/MM_OS2.pm
+lib/ExtUtils/MM_OS390.pm
 lib/ExtUtils/MM_QNX.pm
 lib/ExtUtils/MM_Unix.pm
 lib/ExtUtils/MM_UWIN.pm
@@ -122,6 +123,7 @@ t/MM_Unix.t
 t/MM_VMS.t
 t/MM_Win32.t
 t/oneliner.t
+t/os_unsupported.t
 t/parse_abstract.t
 t/parse_version.t
 t/PL_FILES.t
@@ -134,7 +136,6 @@ t/prereq.t
 t/prereq_print.t
 t/problems.t
 t/prompt.t
-t/os_unsupported.t
 t/recurs.t
 t/revision.t
 t/several_authors.t
