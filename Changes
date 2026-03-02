@@ -1,3 +1,8 @@
+7.77_03 Mon  2 Mar 17:32:54 GMT 2026
+
+    Macosx fixes:
+    - Unbreak Perl builds
+
 7.77_02 Wed 20 Aug 11:00:32 BST 2025
 
     Core fixes:
